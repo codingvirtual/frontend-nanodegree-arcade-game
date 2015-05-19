@@ -51,7 +51,7 @@ Enemy.prototype.update = function (dt) {
 };
 
 Enemy.prototype.render = function () {
-    ctx.drawImage(Resources.get(this.sprite), this.x * 101, (this.y * 83) - 20);
+    ctx.drawImage(Resources.get(this.sprite), this.x * 101, (this.y * 83)-20);
 };
 
 // Now write your own player class
@@ -118,8 +118,9 @@ Player.prototype.checkCollisions = function() {
     //loop through all enemies to see if player overlaps and enemy
     for (var enemy in allEnemies) {
         // check for intersection of bounds of enemy and player
-        if ((Math.round(allEnemies[enemy].x) == this.x) && (Math.round(allEnemies[enemy].y) == this.y)) {
-            this.y = 5;
+        if ((Math.round(allEnemies[enemy].x) == this.x) &&
+            (Math.round(allEnemies[enemy].y) == this.y)) {
+                this.y = 5;
         }
     }
 };
