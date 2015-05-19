@@ -45,8 +45,17 @@ var Engine = (function(global) {
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
+
+        if (player.wins) {
+            window.confirm("YOU WIN!!!");
+            player.wins = false;
+            player.x = 3;
+            player.y = 5;
+        }
         update(dt);
         render();
+
+
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
@@ -57,6 +66,9 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
+        if (player.y == 0) {
+            player.wins = true;
+        }
     };
 
     /* This function does some initial setup that should only occur once,
@@ -80,7 +92,6 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
     }
 
     /* This is called by the update function  and loops through all of the
@@ -135,8 +146,6 @@ var Engine = (function(global) {
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
             }
         }
-
-
         renderEntities();
     }
 
