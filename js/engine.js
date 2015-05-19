@@ -1,3 +1,5 @@
+"use strict";
+
 /* Engine.js
  * This file provides the game loop functionality (update entities and render),
  * draws the initial game board on the screen, and then calls the update and
@@ -52,6 +54,7 @@ var Engine = (function(global) {
             player.x = 3;
             player.y = 5;
         }
+
         update(dt);
         render();
 
@@ -69,7 +72,7 @@ var Engine = (function(global) {
         if (player.y == 0) {
             player.wins = true;
         }
-    };
+    }
 
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the

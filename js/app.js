@@ -1,3 +1,5 @@
+"use strict";
+
 // A superclass for enemies and player to inherit from. Common attributes
 // and methods will live here.
 var Element = function (x, y) {
@@ -6,7 +8,7 @@ var Element = function (x, y) {
     // determine actual drawing location
     this.x = x;
     this.y = y;
-}
+};
 
 // Enemies our player must avoid
 var Enemy = function () {
@@ -18,10 +20,9 @@ var Enemy = function () {
 
     //Create a new enemy in a random row of the three allowed
     Element.call(this, 0, Math.round(Math.random() * 2) + 1);
-    //Element.call(this, 0, 0);
     this.sprite = 'images/enemy-bug.png';
     this.speed = Math.round(Math.random() * 3) + 1;
-}
+};
 
 
 // Update the element's position, required method for game
@@ -39,7 +40,7 @@ Enemy.prototype.checkBounds = function () {
         this.speed = Math.round(Math.random() * 3) + 1;
         this.y = Math.round((Math.random() * 2) + 1);
     }
-}
+};
 
 Enemy.prototype.update = function (dt) {
     // You should multiply any movement by the dt parameter
@@ -47,11 +48,11 @@ Enemy.prototype.update = function (dt) {
     // all computers.
     this.x = this.x + (1 * dt * this.speed);
     this.checkBounds();
-}
+};
 
 Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, (this.y * 83) - 20);
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -62,7 +63,7 @@ var Player = function () {
     Element.call(this, 3, 5);  // always start player at bottom center
     this.sprite = 'images/char-boy.png';
     this.wins = false;
-}
+};
 
 
 Player.prototype = Object.create(Element.prototype);
@@ -82,14 +83,14 @@ Player.prototype.handleInput = function (keycode) {
             this.y++;
             break;
     }
-}
+};
 
 Player.prototype.update = function (dt) {
     // Players move according to a keypress by the player, so
     // update does not need to move the player.
     this.checkBounds();
     this.checkCollisions();
-}
+};
 
 Player.prototype.checkBounds = function () {
     //Players should be checked to see if they reached the water (WIN)
@@ -107,21 +108,21 @@ Player.prototype.checkBounds = function () {
     if (this.y < 0) {
         this.y = 0
     }
-}
+};
 
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, (this.y * 83) -10 );
-}
+};
 
 Player.prototype.checkCollisions = function() {
     //loop through all enemies to see if player overlaps and enemy
-    for (enemy in allEnemies) {
+    for (var enemy in allEnemies) {
         // check for intersection of bounds of enemy and player
         if ((Math.round(allEnemies[enemy].x) == this.x) && (Math.round(allEnemies[enemy].y) == this.y)) {
             this.y = 5;
         }
     }
-}
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
