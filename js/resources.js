@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /* Resources.js
  * This is simple an image loading utility. It eases the process of loading

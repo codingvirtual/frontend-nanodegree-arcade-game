@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 // A superclass for enemies and player to inherit from. Common attributes
 // and methods will live here.
-var Element = function (x, y) {
+var GamePiece = function (x, y) {
     // x and y are being stored as row, column, not actual pixel location
     // these values will be multiplied by 101 and 83 respectively to
     // determine actual drawing location
@@ -19,7 +19,7 @@ var Enemy = function () {
     // a helper we've provided to easily load images
 
     //Create a new enemy in a random row of the three allowed
-    Element.call(this, 0, Math.round(Math.random() * 2) + 1);
+    GamePiece.call(this, 0, Math.round(Math.random() * 2) + 1);
     this.sprite = 'images/enemy-bug.png';
     this.speed = Math.round(Math.random() * 3) + 1;
 };
@@ -30,7 +30,7 @@ var Enemy = function () {
 // This will update both players and enemies
 
 
-Enemy.prototype = Object.create(Element.prototype);
+Enemy.prototype = Object.create(GamePiece.prototype);
 Enemy.prototype.constructor = Enemy;
 
 
@@ -60,13 +60,13 @@ Enemy.prototype.render = function () {
 var Player = function () {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    Element.call(this, 3, 5);  // always start player at bottom center
+    GamePiece.call(this, 3, 5);  // always start player at bottom center
     this.sprite = 'images/char-boy.png';
     this.wins = false;
 };
 
 
-Player.prototype = Object.create(Element.prototype);
+Player.prototype = Object.create(GamePiece.prototype);
 Player.prototype.constructor = Player;
 Player.prototype.handleInput = function (keycode) {
     switch (keycode) {
@@ -106,7 +106,7 @@ Player.prototype.checkBounds = function () {
         this.y = 5;
     }
     if (this.y < 0) {
-        this.y = 0
+        this.y = 0;
     }
 };
 

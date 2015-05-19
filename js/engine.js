@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /* Engine.js
  * This file provides the game loop functionality (update entities and render),
@@ -69,7 +69,7 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
-        if (player.y == 0) {
+        if (player.y === 0) {
             player.wins = true;
         }
     }
